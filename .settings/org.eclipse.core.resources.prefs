@@ -1,4 +1,8 @@
 eclipse.preferences.version=1
+encoding//Debug/ADC/_source/subdir_rules.mk=UTF-8
+encoding//Debug/ADC/_source/subdir_vars.mk=UTF-8
+encoding//Debug/Comunication_UART/_source/subdir_rules.mk=UTF-8
+encoding//Debug/Comunication_UART/_source/subdir_vars.mk=UTF-8
 encoding//Debug/GPIO/_source/subdir_rules.mk=UTF-8
 encoding//Debug/GPIO/_source/subdir_vars.mk=UTF-8
 encoding//Debug/Timer_A/_source/subdir_rules.mk=UTF-8

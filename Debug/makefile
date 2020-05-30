@@ -11,6 +11,8 @@ GEN_CMDS__FLAG :=
 
 ORDERED_OBJS += \
 "./main.obj" \
+"./ADC/_source/ADC.obj" \
+"./Comunication_UART/_source/UART.obj" \
 "./GPIO/_source/GPIO.obj" \
 "./Timer_A/_source/Timer.obj" \
 "../lnk_msp430g2253.cmd" \
@@ -25,9 +27,13 @@ RMDIR := RMDIR /S/Q
 # All of the sources participating in the build are defined here
 -include sources.mk
 -include subdir_vars.mk
+-include ADC/_source/subdir_vars.mk
+-include Comunication_UART/_source/subdir_vars.mk
 -include GPIO/_source/subdir_vars.mk
 -include Timer_A/_source/subdir_vars.mk
 -include subdir_rules.mk
+-include ADC/_source/subdir_rules.mk
+-include Comunication_UART/_source/subdir_rules.mk
 -include GPIO/_source/subdir_rules.mk
 -include Timer_A/_source/subdir_rules.mk
 -include objects.mk
@@ -126,42 +132,42 @@ endif
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXE_OUTPUTS += \
-Timer.out \
+MSP430G2553_Drivers.out \
 
 EXE_OUTPUTS__QUOTED += \
-"Timer.out" \
+"MSP430G2553_Drivers.out" \
 
 BIN_OUTPUTS += \
-Timer.hex \
+MSP430G2553_Drivers.hex \
 
 BIN_OUTPUTS__QUOTED += \
-"Timer.hex" \
+"MSP430G2553_Drivers.hex" \
 
 
 # All Target
 all: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
-	@$(MAKE) --no-print-directory -Onone "Timer.out"
+	@$(MAKE) --no-print-directory -Onone "MSP430G2553_Drivers.out"
 
 # Tool invocations
-Timer.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
+MSP430G2553_Drivers.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 	@echo 'Building target: "$@"'
 	@echo 'Invoking: MSP430 Linker'
-	"C:/ti/ccs1000/ccs/tools/compiler/ti-cgt-msp430_20.2.0.LTS/bin/cl430" -vmsp --use_hw_mpy=none --advice:power=all --define=__MSP430G2253__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number -z -m"Timer.map" --heap_size=80 --stack_size=80 -i"C:/ti/ccs1000/ccs/ccs_base/msp430/include" -i"C:/ti/ccs1000/ccs/tools/compiler/ti-cgt-msp430_20.2.0.LTS/lib" -i"C:/ti/ccs1000/ccs/tools/compiler/ti-cgt-msp430_20.2.0.LTS/include" --reread_libs --diag_wrap=off --display_error_number --warn_sections --xml_link_info="Timer_linkInfo.xml" --use_hw_mpy=none --rom_model -o "Timer.out" $(ORDERED_OBJS)
+	"C:/ti/ccs1000/ccs/tools/compiler/ti-cgt-msp430_20.2.0.LTS/bin/cl430" -vmsp --use_hw_mpy=none --advice:power=all --define=__MSP430G2253__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number -z -m"MSP430G2553_Drivers.map" --heap_size=80 --stack_size=80 -i"C:/ti/ccs1000/ccs/ccs_base/msp430/include" -i"C:/ti/ccs1000/ccs/tools/compiler/ti-cgt-msp430_20.2.0.LTS/lib" -i"C:/ti/ccs1000/ccs/tools/compiler/ti-cgt-msp430_20.2.0.LTS/include" --reread_libs --diag_wrap=off --display_error_number --warn_sections --xml_link_info="MSP430G2553_Drivers_linkInfo.xml" --use_hw_mpy=none --rom_model -o "MSP430G2553_Drivers.out" $(ORDERED_OBJS)
 	@echo 'Finished building target: "$@"'
 	@echo ' '
 
-Timer.hex: $(EXE_OUTPUTS)
+MSP430G2553_Drivers.hex: $(EXE_OUTPUTS)
 	@echo 'Building files: $(strip $(EXE_OUTPUTS__QUOTED))'
 	@echo 'Invoking: MSP430 Hex Utility'
-	"C:/ti/ccs1000/ccs/tools/compiler/ti-cgt-msp430_20.2.0.LTS/bin/hex430" --memwidth=8 --romwidth=8 -o "Timer.hex" $(EXE_OUTPUTS__QUOTED)
+	"C:/ti/ccs1000/ccs/tools/compiler/ti-cgt-msp430_20.2.0.LTS/bin/hex430" --memwidth=8 --romwidth=8 -o "MSP430G2553_Drivers.hex" $(EXE_OUTPUTS__QUOTED)
 	@echo 'Finished building: $(strip $(EXE_OUTPUTS__QUOTED))'
 	@echo ' '
 
 # Other Targets
 clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "main.obj" "GPIO\_source\GPIO.obj" "Timer_A\_source\Timer.obj" 
-	-$(RM) "main.d" "GPIO\_source\GPIO.d" "Timer_A\_source\Timer.d" 
+	-$(RM) "main.obj" "ADC\_source\ADC.obj" "Comunication_UART\_source\UART.obj" "GPIO\_source\GPIO.obj" "Timer_A\_source\Timer.obj" 
+	-$(RM) "main.d" "ADC\_source\ADC.d" "Comunication_UART\_source\UART.d" "GPIO\_source\GPIO.d" "Timer_A\_source\Timer.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 
