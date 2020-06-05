@@ -25,21 +25,22 @@ typedef enum uart_error_handling_tag
 
 }uart_error_handling_T;
 
-typedef struct buffer_data_out_tag
+typedef struct buffer_data_tag
 {
-    uint8_t buffer_out[BUFFER_OUT_LENGHT];
-    uint8_t  buffer_in[BUFFER_OUT_LENGHT];
+    uint8_t  buffer_tx;                    /**/
+    uint8_t  buffer_rx[BUFFER_OUT_LENGHT]; /**/
 }buffer_data_T;
 
-buffer_data_T data_out_uart;
+static buffer_data_T global_data_uart;
 static uint8_t global_uart_temp_string;
+
 /* #########################################################################
  * #                      Prototype Functions                              #
  * #########################################################################
  */
 
 void uart_setting(void);
-uart_error_handling_T read_message(char * buff_data);
-uart_error_handling_T send_message(char * buff_data);
+uart_error_handling_T read_message(uint8_t * buff_data);
+uart_error_handling_T send_message(uint8_t * buff_data);
 
 #endif /* COMUNICATION_UART_UART_H_ */

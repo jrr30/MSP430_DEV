@@ -24,20 +24,23 @@ void uart_setting(void)
     UCA0CTL1 &= ~UCSWRST;
 }
 
-uart_error_handling_T read_message(char * buff_data)
+uart_error_handling_T read_message(uint8_t * buff_data)
 {
     const uart_error_handling_T read_status = UART_request_error;
+
+    memcpy(buff_data, global_data_uart.buffer_rx, ARRAY_LENGHT(global_data_uart.buffer_rx));
+
     return read_status;
 }
 
-uart_error_handling_T send_message(char * buff_data)
+uart_error_handling_T send_message(uint8_t * buff_data)
 {
     const uart_error_handling_T send_status = UART_request_error;
     unsigned int iter;
 
     for(iter = 0; iter <= ARRAY_LENGHT(buff_data); iter++)
     {
-        global_uart_temp_string = buff_data[iter];
+        global_data_uart.buffer_tx = buff_data[iter];
         IE2 |= UCA0TXIE;
     }
     return send_status;
@@ -48,15 +51,15 @@ uart_error_handling_T send_message(char * buff_data)
 __interrupt void UART0_TX (void)
 {
 
-    UCA0TXBUF  = global_uart_temp_string;
-    IE2       &=               ~UCA0TXIE;
+    UCA0TXBUF  =  global_data_uart.buffer_tx;
+    IE2       &=                   ~UCA0TXIE;
 }
 
 #pragma vector=USCIAB0RX_VECTOR
 __interrupt void UART0_RX (void)
 {
     static uint8_t iter = 0;
-    data_out_uart.buffer_out[iter++] = UCA0RXBUF;
+    global_data_uart.buffer_rx[iter++] = UCA0RXBUF;
     if(BUFFER_OUT_LENGHT == iter)
     {
         iter = 0;

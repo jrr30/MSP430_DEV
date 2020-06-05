@@ -12,7 +12,7 @@
  * All rights reserved.
  */
 
-char Text[] = "Hola";
+uint8_t Text[] = "Hola";
 
 void main(void)
 {
@@ -20,15 +20,19 @@ void main(void)
 
     BCSCTL1 = CALBC1_1MHZ;
     DCOCTL = CALDCO_1MHZ;
-    (void) Define_PIN(( BIT2 +BIT1 ), Pout);
-    P1SEL  |=  BIT2 +BIT1;
-    P1SEL2 |=  BIT2 +BIT1;
     uart_setting();
+    (void) Define_PIN(( BIT1 + BIT2), Pin);
+    P1SEL  |=  BIT1 + BIT2;
+    P1SEL2 |=  BIT1 + BIT2;
+
+    uint8_t temp_buffer[4];
+
    _enable_interrupt();
 
     while(1)
     {
-        (void) send_message(Text);
+       (void)send_message(Text);
+       (void)read_message(temp_buffer);
     }
 
 }

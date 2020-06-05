@@ -16,6 +16,7 @@ void Setting_up_Timer0_A(void)
     TACCR0 = 0;
 }
 
+
 void Setting_up_PWM(void)
 {
     TA0CTL  = TASSEL_2 + MC_1 + ID_0;
