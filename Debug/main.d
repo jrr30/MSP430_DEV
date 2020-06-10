@@ -18,6 +18,7 @@ main.obj: C:/ti/ccs1000/ccs/tools/compiler/ti-cgt-msp430_20.2.0.LTS/include/sys/
 main.obj: ../Timer_A/_inc/Timer.h
 main.obj: ../Comunication_UART/_inc/UART.h
 main.obj: ../GPIO/_inc/GPIO.h
+main.obj: ../LCD_1602A/_inc/lcd_1602A.h
 
 ../main.c: 
 C:/ti/ccs1000/ccs/ccs_base/msp430/include/msp430g2553.h: 
@@ -37,3 +38,4 @@ C:/ti/ccs1000/ccs/tools/compiler/ti-cgt-msp430_20.2.0.LTS/include/sys/_stdint.h:
 ../Timer_A/_inc/Timer.h: 
 ../Comunication_UART/_inc/UART.h: 
 ../GPIO/_inc/GPIO.h: 
+../LCD_1602A/_inc/lcd_1602A.h: 

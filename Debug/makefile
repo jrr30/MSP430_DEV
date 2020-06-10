@@ -14,6 +14,7 @@ ORDERED_OBJS += \
 "./ADC/_source/ADC.obj" \
 "./Comunication_UART/_source/UART.obj" \
 "./GPIO/_source/GPIO.obj" \
+"./LCD_1602A/_source/lcd_1602A.obj" \
 "./Timer_A/_source/Timer.obj" \
 "../lnk_msp430g2253.cmd" \
 $(GEN_CMDS__FLAG) \
@@ -30,11 +31,13 @@ RMDIR := RMDIR /S/Q
 -include ADC/_source/subdir_vars.mk
 -include Comunication_UART/_source/subdir_vars.mk
 -include GPIO/_source/subdir_vars.mk
+-include LCD_1602A/_source/subdir_vars.mk
 -include Timer_A/_source/subdir_vars.mk
 -include subdir_rules.mk
 -include ADC/_source/subdir_rules.mk
 -include Comunication_UART/_source/subdir_rules.mk
 -include GPIO/_source/subdir_rules.mk
+-include LCD_1602A/_source/subdir_rules.mk
 -include Timer_A/_source/subdir_rules.mk
 -include objects.mk
 
@@ -166,8 +169,8 @@ MSP430G2553_Drivers.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "main.obj" "ADC\_source\ADC.obj" "Comunication_UART\_source\UART.obj" "GPIO\_source\GPIO.obj" "Timer_A\_source\Timer.obj" 
-	-$(RM) "main.d" "ADC\_source\ADC.d" "Comunication_UART\_source\UART.d" "GPIO\_source\GPIO.d" "Timer_A\_source\Timer.d" 
+	-$(RM) "main.obj" "ADC\_source\ADC.obj" "Comunication_UART\_source\UART.obj" "GPIO\_source\GPIO.obj" "LCD_1602A\_source\lcd_1602A.obj" "Timer_A\_source\Timer.obj" 
+	-$(RM) "main.d" "ADC\_source\ADC.d" "Comunication_UART\_source\UART.d" "GPIO\_source\GPIO.d" "LCD_1602A\_source\lcd_1602A.d" "Timer_A\_source\Timer.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 

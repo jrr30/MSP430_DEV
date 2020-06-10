@@ -3,6 +3,7 @@
 #include "Timer_A/_inc/Timer.h"
 #include "Comunication_UART/_inc/UART.h"
 #include "GPIO/_inc/GPIO.h"
+#include "LCD_1602A/_inc/lcd_1602A.h"
 
 
 /**
@@ -12,7 +13,7 @@
  * All rights reserved.
  */
 
-uint8_t Text[] = "Hola";
+uint8_t Text[] = "Hola Mundo";
 
 void main(void)
 {
@@ -20,19 +21,16 @@ void main(void)
 
     BCSCTL1 = CALBC1_1MHZ;
     DCOCTL = CALDCO_1MHZ;
-    uart_setting();
-    (void) Define_PIN(( BIT1 + BIT2), Pin);
-    P1SEL  |=  BIT1 + BIT2;
-    P1SEL2 |=  BIT1 + BIT2;
 
-    uint8_t temp_buffer[4];
+    P2DIR |= D4 + D5 + D6 + D7;
+    P1DIR |= RS + RW + E;
 
-   _enable_interrupt();
+    Cfg_LCD(four_bit_data);
+
 
     while(1)
     {
-       (void)send_message(Text);
-       (void)read_message(temp_buffer);
+        Print_Text(Text);
     }
 
 }

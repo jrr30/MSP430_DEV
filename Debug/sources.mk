@@ -115,5 +115,6 @@ SUBDIRS := \
 ADC/_source \
 Comunication_UART/_source \
 GPIO/_source \
+LCD_1602A/_source \
 Timer_A/_source \
 
