@@ -27,12 +27,11 @@
 #define D2 BIT2
 #define D3 BIT3
 
-#define ARRAY_LENGHT(array) ((sizeof(array)/sizeof(array[0])))
 #define COLUMNS 15 /*ROWS starts at 0 to 15, having a total of 16 COLUMNS*/
 
 #define CLEAR_DISPLAY 0x01u
 #define RETURN_HOME   0x02u
-#define DISPLAY_ON    0x0Fu /*C*/
+#define DISPLAY_ON    0x0Eu /*C*/
 #define DISPLAY_OFF   0x08u
 #define ENTRY_INCREMENT 0x06u
 #define ENTRY_DECREMENT 0x04u
@@ -57,7 +56,7 @@ void Write_Instruction(uint8_t instruction);
 void Set_Instruction_Low_Level(uint8_t instruction_raw);
 void Pulse_Enable(void);
 void Cfg_LCD(data_line_T data_line);
-void Print_Text(uint8_t * text);
-void Set_Cursor(uint8_t * position);
+void Printf_LCD(uint8_t * text);
+void Set_Cursor(uint8_t row, uint8_t column);
 
 #endif /* LCD_1602A_H_ */

@@ -13,7 +13,7 @@ void Setting_up_Timer0_A(void)
 {
     TACTL = TASSEL_2 + MC_1 + ID_0;
     TACCTL0 |= CCIE;
-    TACCR0 = 0;
+    TACCR0 = 0; //0 to turn off 1000 - 1
 }
 
 
@@ -39,16 +39,29 @@ void Pulse(int ms, int state, int bit)
 
     while(interrupt_counts <= ms)
     {
-        (void) Port_State(bit, state);
+        (void) Port_Out_State(bit, state, Port_1);
     }
 
     TACCR0 = 0; // Turning off counter
-    (void) Port_State(bit, (~state));
+    (void) Port_Out_State(bit, (~state), Port_1);
 }
-
+/*
 
 #pragma vector=TIMER0_A0_VECTOR
 __interrupt void Timer_A0 (void)
 {
     interrupt_counts ++; //it increments every milisecond
+    if(1000 <= interrupt_counts)
+    {
+        interrupt_counts = 0;
+        Write_Data(Numers[seconds++]);
+        if(9 <= interrupt_counts)
+        {
+            seconds = 0;
+            Write_Instruction(CLEAR_DISPLAY);
+            Write_Instruction(RETURN_HOME);
+        }
+
+    }
 }
+*/

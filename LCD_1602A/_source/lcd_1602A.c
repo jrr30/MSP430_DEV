@@ -28,7 +28,7 @@ void Set_Data_Low_Level(uint8_t data_raw)
 
     P2OUT = data_raw;
     Pulse_Enable();
-    __delay_cycles(38);
+    __delay_cycles(40);
 }
 
 void Write_Instruction(uint8_t instruction)
@@ -51,7 +51,7 @@ void Set_Instruction_Low_Level(uint8_t instruction_raw)
 
     P2OUT = instruction_raw;
     Pulse_Enable();
-    __delay_cycles(38);
+    __delay_cycles(40);
 }
 
 void Pulse_Enable(void)
@@ -78,10 +78,11 @@ void Cfg_LCD(data_line_T data_line)
     {
          /*TODO Do nothing*/
     }
-
     __delay_cycles(20000);
+    Write_Instruction(0x33u);
+    __delay_cycles(5000);
     Write_Instruction(line_selection);
-    Write_Instruction(DISPLAY_ON);
+    Write_Instruction(0x8u);
     Write_Instruction(CLEAR_DISPLAY);
     __delay_cycles(2000);
     Write_Instruction(ENTRY_INCREMENT);
@@ -89,12 +90,15 @@ void Cfg_LCD(data_line_T data_line)
     __delay_cycles(2000);
 }
 
-void Set_Cursor(uint8_t * position)
+void Set_Cursor(uint8_t row, uint8_t column)
 {
-
+    uint8_t position = 0x80u;
+    position |= ((column&MASK_LOW));
+    position |= (row<<6);
+    Write_Instruction(position);
 }
 
-void Print_Text(uint8_t * text)
+void Printf_LCD(uint8_t * text)
 {
     uint8_t iter;
 
@@ -109,7 +113,7 @@ void Print_Text(uint8_t * text)
         else
         {
             Write_Data(text[iter]);
-            __delay_cycles(90000);
+            //__delay_cycles(90000);
         }
 
     }
